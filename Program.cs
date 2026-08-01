@@ -12,7 +12,15 @@
     switch (choice)
     {
         case "1":
-            Console.WriteLine("Log Study Session - TODO");
+            Console.Write("Enter Subject: ");
+            string subject = Console.ReadLine()!;
+            Console.Write("Enter duration in minutes: ");
+            string duration = Console.ReadLine()!;
+            DateTime dateTime = DateTime.Now;
+            string date = dateTime.ToString("dd/MM/yyyy");
+            string logEntry = $"{date} | {subject} | {duration} minutes";
+            File.AppendAllText("study_log.txt", logEntry + Environment.NewLine);
+            Console.WriteLine("Session Logged");
             break;
         case "2":
             Console.WriteLine("View Study Log - TODO");
