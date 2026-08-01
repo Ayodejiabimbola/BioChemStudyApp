@@ -23,7 +23,18 @@
             Console.WriteLine("Session Logged");
             break;
         case "2":
-            Console.WriteLine("View Study Log - TODO");
+            if(File.Exists("study_log.txt"))
+            {
+                string[] lines = File.ReadAllLines("study_log.txt");
+                foreach(var line in lines)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No sessions logged yet");
+            }
             break;
         case "3":
             Console.WriteLine("Molecular Weight Calculator - TODO");
