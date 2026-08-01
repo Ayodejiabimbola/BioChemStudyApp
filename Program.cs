@@ -89,7 +89,54 @@ while (true)
             }
             break;
         case "4":
-            Console.WriteLine("Biochemistry Quiz - TODO");
+            string[] questions = new string[]
+            {
+        "What is the powerhouse of the cell?\nA. Nucleus\nB. Mitochondria\nC. Ribosome\nD. Golgi apparatus",
+        "Which nitrogenous base is found in RNA but NOT DNA?\nA. Adenine\nB. Thymine\nC. Uracil\nD. Guanine",
+        "What is the primary monosaccharide used for energy in cells?\nA. Fructose\nB. Galactose\nC. Glucose\nD. Sucrose",
+        "Which enzyme breaks down starch into maltose?\nA. Lipase\nB. Amylase\nC. Protease\nD. Lactase",
+        "What does ATP stand for?\nA. Adenosine Triphosphate\nB. Alanine Transfer Protein\nC. Adenine Thymine Pair\nD. Active Transport Pump"
+            };
+            string[] correctAnswers = new string[] { "B", "C", "C", "B", "A" };
+
+            int score = 0;
+
+            for (int q = 0; q < questions.Length; q++)
+            {
+                Console.WriteLine($"\nQuestion {q + 1}:");
+                Console.WriteLine(questions[q]);
+                Console.Write("Your answer (A/B/C/D): ");
+                string? answer = Console.ReadLine()?.Trim().ToUpper();
+
+                if (answer == correctAnswers[q])
+                {
+                    Console.WriteLine("Correct!");
+                    score++;
+                }
+                else
+                {
+                    Console.WriteLine($"Wrong! The correct answer was {correctAnswers[q]}.");
+                }
+            }
+
+            Console.WriteLine($"\nQuiz complete! You scored {score}/{questions.Length}.");
+
+            int highScore = 0;
+            if (File.Exists("quiz_highscore.txt"))
+            {
+                string saved = File.ReadAllText("quiz_highscore.txt").Trim();
+                int.TryParse(saved, out highScore);
+            }
+
+            if (score > highScore)
+            {
+                Console.WriteLine($"New high score! Previous best: {highScore}");
+                File.WriteAllText("quiz_highscore.txt", score.ToString());
+            }
+            else
+            {
+                Console.WriteLine($"High score to beat: {highScore}");
+            }
             break;
         case "5":
             Console.WriteLine("Goodbye");
